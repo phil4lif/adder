@@ -19,10 +19,10 @@ export const AppProvider = ({ children }) => {
 
     const addValues = () => {
         setAppState(prev => ({ ...prev, calculatedValue: parseInt(appState.inputOneValue) + parseInt(appState.inputTwoValue) }));
-        document.getElementById("inputOne").focus();
     }
     const handleClear = () => {
         setAppState(initalState)
+        document.getElementById("inputOne").focus();
     }
     const handleInputOne = (event) => {
         let input = event.target.value;
