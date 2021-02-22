@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "create": "webpack"
   },
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1"
   }
 }
