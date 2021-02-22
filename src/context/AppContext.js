@@ -3,28 +3,44 @@ import React, { useContext, useState } from 'react';
 const AppContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
+    let regexp = /^[0-9\b]+$/
+    const initalState = {
+        inputOneValue: '',
+        inputTwoValue: '',
+        calculatedValue: 0
+    }
     const [appState, setAppState] = useState(
         {
-            inputOneValue: '5',
-            inputTwoValue: '6',
+            inputOneValue: '',
+            inputTwoValue: '',
             calculatedValue: 0
         }
     );
 
     const addValues = () => {
-        setAppState({ ...appState, calculatedValue: parseInt(inputOneValue) + parseInt(inputTwoValue) })
+        setAppState(prev => ({ ...prev, calculatedValue: parseInt(appState.inputOneValue) + parseInt(appState.inputTwoValue) }));
+        document.getElementById("inputOne").focus();
     }
-    const handleInputOne = (input) => {
-        setAppState({ ...appState, inputOneValue: input })
+    const handleClear = () => {
+        setAppState(initalState)
     }
-    const handleInputTwo = (input) => {
-        setAppState({ ...appState, inputTwoValue: input })
+    const handleInputOne = (event) => {
+        let input = event.target.value;
+        if (input === '' || regexp.test(input)) {
+            setAppState(prev => ({ ...prev, inputOneValue: input }))
+        }
+    }
+    const handleInputTwo = (event) => {
+        let input = event.target.value;
+        if (input === '' || regexp.test(input)) {
+            setAppState(prev => ({ ...prev, inputTwoValue: event.target.value }))
+        }
     }
 
     return <AppContext.Provider
-        value={{ addValues, handleInputOne, handleInputTwo, appState }}>
-            {children}
-        </AppContext.Provider>
+        value={{ addValues, handleInputOne, handleInputTwo, handleClear, appState }}>
+        {children}
+    </AppContext.Provider>
 }
 
 export default AppContext;
